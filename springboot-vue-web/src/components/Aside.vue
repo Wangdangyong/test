@@ -30,21 +30,6 @@ export default {
   name: "Aside",
   data() {
     return{
-      // isCollapse:false
-      // menu:[
-      //   {
-      //     menuClick:'admin',
-      //     menuNane:'管理员管理',
-      //     menuIcon:'el-icon-s-custom'
-      //   },
-      //   {
-      //     menuClick: 'user',
-      //     menuNane: '用户管理',
-      //     menuIcon: 'el-icon-user-solid'
-      //   }
-      //
-      //
-      // ]
     }
   },
   computed:{

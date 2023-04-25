@@ -177,18 +177,9 @@ export default {
   },
 
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/score/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
-
-      })
-
-    },
     del(id){
       this.$axios.get(this.$httpUrl + '/score/del?id='+id,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -198,11 +189,8 @@ export default {
           this.loadPost()
         } else {
           this.$message.error('操作失败');
-
         }
       })
-
-
     },
     mod(row){
       this.form.id=row.id
@@ -229,14 +217,12 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('修改失败');
-
           }
         })
       }
       else {
         this.$axios.post(this.$httpUrl + '/score/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -290,12 +276,8 @@ export default {
         pageNum: this.pageNum,
         param: {
           studentId: this.studentId+''
-
-
         }
-
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total
@@ -306,13 +288,11 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },

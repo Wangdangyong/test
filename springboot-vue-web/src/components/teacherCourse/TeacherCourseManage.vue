@@ -234,7 +234,6 @@ export default {
         scopePoint:0,
         usualScoreCom:0,
          finalScoreCom:0
-
       },
     }
   },
@@ -264,25 +263,16 @@ export default {
       }else
          this.form.scorePoint=0
       return this.form.scorePoint
-
-
-
-
-
     },
-
     allScore(){
       this.form.allScore = Math.round(this.form.usualScoreCom*(this.form.usualScore) +  this.form.finalScoreCom*(this.form.finalScore))
       return this.form.allScore
     }
   },
   methods: {
-
     loadGet() {
       this.$axios.get(this.$httpUrl + '/doScore/list').then(res => res.data).then(res => {
-
       })
-
     },
     del(id){
       this.$axios.get(this.$httpUrl + '/doScore/del?id='+id,
@@ -300,11 +290,8 @@ export default {
 
         }
       })
-
-
     },
     mod(row){
-      console.log(row)
       this.form.id=row.id
       this.form.teacherId=row.teacherId
       this.form.courseId=row.courseId
@@ -321,10 +308,8 @@ export default {
       this.form.scoreId=row.scoreId
       this.form.flag=row.flag
       this.centerDialogVisible = true
-
     },
     save() {
-      console.log(this.form)
       if (this.form.id){
         this.$axios.post(this.$httpUrl + '/doScore/update', this.form
         ).then(res => res.data).then(res => {
@@ -345,7 +330,6 @@ export default {
       else {
         this.$axios.post(this.$httpUrl + '/doScore/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -428,7 +412,6 @@ export default {
         }
 
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           sessionStorage.setItem('CurStudent',JSON.stringify(res.data))
           this.tableData = res.data
@@ -440,13 +423,11 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },

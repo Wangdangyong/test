@@ -176,19 +176,9 @@ export default {
     }
   },
   methods: {
-
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/class-course/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
-
-      })
-
-    },
     del(id){
       this.$axios.get(this.$httpUrl + '/class-course/del?id='+id,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code ==200) {
           this.$message({
                 message: '操作成功',
@@ -205,7 +195,6 @@ export default {
 
     },
     mod(row){
-      console.log(row)
       this.form.id=row.id
       this.form.classId=row.classId
       this.form.courseId=row.courseId

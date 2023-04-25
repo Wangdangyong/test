@@ -34,15 +34,11 @@
               {{teacherData.find(v =>v.teacherId===scope.row.teacherId).teacherName}}
             </span>
         </template>
-
       </el-table-column>
       <el-table-column prop="room" label="教室" width="200">
       </el-table-column>
       <el-table-column prop="time" label="补考时间" width="200">
       </el-table-column>
-
-
-
       <el-table-column prop="operate" label="操作" width="200"v-if="user.roleId===0">
         <template slot-scope="scope">
           <el-button type="success" @click="mod(scope.row)" v-if="user.roleId===0">编辑</el-button>
@@ -192,22 +188,10 @@ export default {
         teacherId:'',
         room:'',
         time:'',
-
-
       },
-
-
-
     }
   },
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/examination/list').then(res => res.data).then(res => {
-
-
-      })
-
-    },
     del(id){
       this.$axios.get(this.$httpUrl + '/examination/del?id='+id,
       ).then(res => res.data).then(res => {
@@ -223,11 +207,8 @@ export default {
 
         }
       })
-
-
     },
     mod(row){
-      console.log(row)
       this.form.id=row.id
       this.form.studentId=row.studentId
       this.form.courseId=row.courseId
@@ -251,14 +232,12 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('修改失败');
-
           }
         })
       }
       else {
         this.$axios.post(this.$httpUrl + '/examination/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -293,7 +272,6 @@ export default {
           // alert("获取数据失败")
         }
       })
-
     },
     loadTeacher(){
       this.$axios.get(this.$httpUrl + '/teacher/list').then(res => res.data).then(res => {
@@ -332,13 +310,8 @@ export default {
         param: {
           studentId: this.studentId+'',
           courseId: this.courseId+''
-
-
-
         }
-
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total
@@ -349,13 +322,11 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },

@@ -172,19 +172,9 @@ export default {
     }
   },
   methods: {
-
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/student/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
-
-      })
-
-    },
     del(studentId){
       this.$axios.get(this.$httpUrl + '/student/del?studentId='+studentId,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -201,7 +191,6 @@ export default {
 
     },
     mod(row){
-      console.log(row)
       this.form.studentId=row.studentId
       this.form.studentNumber=row.studentNumber
       this.form.studentName=row.studentName
@@ -234,7 +223,6 @@ export default {
       else {
         this.$axios.post(this.$httpUrl + '/student/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -245,11 +233,9 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('操作失败');
-
           }
         })
       }
-
     },
     loadUser(){
       this.$axios.get(this.$httpUrl + '/user/list').then(res => res.data).then(res => {
@@ -271,37 +257,26 @@ export default {
           // alert("获取数据失败")
         }
       })
-
     },
     loadClass(){
       this.$axios.get(this.$httpUrl + '/class/list').then(res => res.data).then(res => {
-        console.log(res)
         if (res.code ==200) {
           this.classData = res.data
-
         } else {
           // alert("获取数据失败")
         }
       })
-
     },
-
-
     loadPost() {
       this.$axios.post(this.$httpUrl + '/student/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {
           studentNumber: this.studentNumber+'',
-
           studentName: this.studentName,
           studentMajorId: this.studentMajorId+''
-
-
         }
-
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           sessionStorage.setItem('CurStudent',JSON.stringify(res.data))
           this.tableData = res.data
@@ -313,13 +288,11 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },

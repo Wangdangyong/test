@@ -190,22 +190,10 @@ export default {
         teacherId:'',
         room:'',
         time:'',
-
-
       },
-
-
-
     }
   },
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/examination/list').then(res => res.data).then(res => {
-
-
-      })
-
-    },
     del(id){
       this.$axios.get(this.$httpUrl + '/examination/del?id='+id,
       ).then(res => res.data).then(res => {
@@ -218,14 +206,10 @@ export default {
           this.loadPost()
         } else {
           this.$message.error('操作失败');
-
         }
       })
-
-
     },
     mod(row){
-      console.log(row)
       this.form.id=row.id
       this.form.studentId=row.studentId
       this.form.courseId=row.courseId
@@ -256,7 +240,6 @@ export default {
       else {
         this.$axios.post(this.$httpUrl + '/examination/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -267,7 +250,6 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('操作失败');
-
           }
         })
       }
@@ -310,13 +292,9 @@ export default {
         param: {
           studentId: this.studentId+'',
           courseId: this.courseId+''
-
-
-
         }
 
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total

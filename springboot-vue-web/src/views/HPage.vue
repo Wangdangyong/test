@@ -108,31 +108,20 @@ export default {
       },
       rules:{
         notice: [
-
           { required: true, message: '请填写活公告', trigger: 'blur' }
-
-
         ]
-
       },
-
-
-
     }
   },
   methods: {
-
     loadGet() {
       this.$axios.get(this.$httpUrl + '/notice/list').then(res => res.data).then(res => {
         this.tableData=res.data
-
       })
-
     },
     del(id){
       this.$axios.get(this.$httpUrl + '/notice/del?id='+id,
       ).then(res => res.data).then(res => {
-
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -142,19 +131,14 @@ export default {
           this.loadGet()
         } else {
           this.$message.error('操作失败');
-
         }
       })
 
-
     },
     mod(row){
-      console.log(row)
       this.form.id=row.id
       this.form.notice=row.notice
-
       this.centerDialogVisible = true
-
     },
     save() {
       if (this.form.id){

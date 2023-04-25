@@ -120,36 +120,19 @@ export default {
         teacherNumber:'',
         teacherName: '',
         teacherDepId: ''
-
-
-
       },
-
-
-
     }
   },
   methods: {
     formatDep(row){
       let temp=this.depData.find(item=>{
         return item.depId==row.teacherDepId
-
       })
       return temp && temp.depName
-
-    },
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/teacher/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
-
-      })
-
     },
     del(teacherId){
       this.$axios.get(this.$httpUrl + '/teacher/del?teacherId='+teacherId,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -159,23 +142,15 @@ export default {
           this.loadPost()
         } else {
           this.$message.error('操作失败');
-
         }
       })
-
-
     },
     mod(row){
-      console.log(row)
       this.form.teacherId=row.teacherId
       this.form.teacherNumber=row.teacherNumber
       this.form.teacherName=row.teacherName
       this.form.teacherDepId=row.teacherDepId
-
-
       this.centerDialogVisible = true
-
-
     },
     update(){
       this.$axios.post(this.$httpUrl + '/teacher/update', this.form
@@ -190,10 +165,8 @@ export default {
           this.loadPost()
         } else {
           this.$message.error('修改失败');
-
         }
       })
-
     },
 
     save() {
@@ -210,14 +183,12 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('修改失败');
-
           }
         })
       }
       else {
         this.$axios.post(this.$httpUrl + '/teacher/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -237,7 +208,6 @@ export default {
     },
     loadDep(){
       this.$axios.get(this.$httpUrl + '/department/list').then(res => res.data).then(res => {
-        console.log(res)
         if (res.code ==200) {
           this.depData = res.data
         } else {
@@ -253,12 +223,8 @@ export default {
         param: {
           teacherName: this.teacherName,
           teacherDepId: this.teacherDepId+''
-
-
         }
-
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total
@@ -266,16 +232,13 @@ export default {
           alert("获取数据失败")
         }
       })
-
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },

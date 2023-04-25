@@ -124,18 +124,10 @@ export default {
     }
   },
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/user/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
 
-      })
-
-    },
     del(userId){
       this.$axios.get(this.$httpUrl + '/user/del?userId='+userId,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -152,7 +144,6 @@ export default {
 
     },
     mod(row){
-      console.log(row)
       this.form.userId=row.userId
       this.form.userAccount=row.userAccount
       this.form.userName=row.userName
@@ -183,7 +174,6 @@ export default {
       else {
         this.$axios.post(this.$httpUrl + '/user/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -212,7 +202,6 @@ export default {
         }
 
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total
@@ -223,13 +212,12 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },
@@ -245,7 +233,6 @@ export default {
     }
   },
   beforeMount() {
-    // this.loadGet();
     this.loadPost();
   }
 }

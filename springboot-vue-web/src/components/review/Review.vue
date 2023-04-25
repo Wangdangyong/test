@@ -122,51 +122,34 @@ export default {
         review:'',
         teacherId:'',
         studentId:''
-
       },
       rules:{
         review: [
-
           { required: true, message: '请填写评价', trigger: 'blur' }
-
-
         ]
-
       },
-
-
     }
   },
   methods: {
-
     loadGet() {
       this.$axios.get(this.$httpUrl + '/review/list').then(res => res.data).then(res => {
-        console.log(111)
         this.tableData=res.data
-
       })
-
     },
     loadTeacher() {
       this.$axios.get(this.$httpUrl + '/teacher/list').then(res => res.data).then(res => {
         console.log(res)
         this.teacherData=res.data
-
       })
-
     },
     loadStudent() {
       this.$axios.get(this.$httpUrl + '/student/list').then(res => res.data).then(res => {
-        console.log(res)
         this.studentData=res.data
-
       })
-
     },
     del(id){
       this.$axios.get(this.$httpUrl + '/review/del?id='+id,
       ).then(res => res.data).then(res => {
-
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -179,11 +162,8 @@ export default {
 
         }
       })
-
-
     },
     mod(row){
-      console.log(row)
       this.form.id=row.id
       this.form.review=row.review
       this.form.teacherId=row.teacherId

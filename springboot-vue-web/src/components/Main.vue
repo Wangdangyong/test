@@ -143,17 +143,6 @@ export default {
       pageNum: 1,
       total: '',
       username: '',
-      sex: '',
-      sexs: [
-        {
-          value: '0',
-          label: '女'
-        }, {
-          value: '1',
-          label: '男'
-        }
-
-      ],
       centerDialogVisible: false,
       form: {
         id:'',
@@ -167,19 +156,9 @@ export default {
         isvalid: ''
       },
 
-
-
     }
   },
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/user/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
-
-      })
-
-    },
     del(id){
       this.$axios.get(this.$httpUrl + '/user/del?id='+id,
       ).then(res => res.data).then(res => {
@@ -193,14 +172,10 @@ export default {
           this.loadPost()
         } else {
           this.$message.error('操作失败');
-
         }
       })
-
-
     },
     mod(row){
-      console.log(row)
       this.form.id=row.id
       this.form.account=row.account
       this.form.username=row.username
@@ -234,7 +209,6 @@ export default {
       else {
         this.$axios.post(this.$httpUrl + '/user/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -262,7 +236,6 @@ export default {
         }
 
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total
@@ -273,13 +246,11 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },

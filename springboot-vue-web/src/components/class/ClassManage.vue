@@ -298,18 +298,9 @@ export default {
       this.loadcCourse()
 
     },
-
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/class/list').then(res => res.data).then(res => {
-        // this.tableData=res
-
-      })
-
-    },
     del(classId){
       this.$axios.get(this.$httpUrl + '/class/del?classId='+classId,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -326,7 +317,6 @@ export default {
 
     },
     mod(row){
-      console.log(row)
       this.form.classId=row.classId
       this.form.classNo=row.classNo
       this.form.className=row.className
@@ -444,13 +434,11 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },
@@ -458,12 +446,6 @@ export default {
       this.form.classNo=''
       this.form.className = ''
       this.form.classNumber=''
-
-
-    },
-    resetFormCCourse(){
-
-          this.classCourseData.id=''
 
 
     },

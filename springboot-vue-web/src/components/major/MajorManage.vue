@@ -138,19 +138,8 @@ export default {
     formatDep(row){
       let temp=this.depData.find(item=>{
         return item.depId==row.majorDepId
-
       })
       return temp && temp.depName
-
-    },
-
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/major/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
-
-      })
-
     },
     del(majorId){
       this.$axios.get(this.$httpUrl + '/major/del?majorId='+majorId,
@@ -169,20 +158,14 @@ export default {
         }
       })
 
-
     },
     mod(row){
-      console.log(row)
       this.form.majorId=row.majorId
       this.form.majorNo=row.majorNo
       this.form.majorName=row.majorName
       this.form.majorTeacher=row.majorTeacher
       this.form.majorDepId=row.majorDepId
-
-
-
       this.centerDialogVisible = true
-
     },
     save() {
       if (this.form.majorId){
@@ -205,7 +188,6 @@ export default {
       else {
         this.$axios.post(this.$httpUrl + '/major/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -220,11 +202,9 @@ export default {
           }
         })
       }
-
     },
     loadDep(){
       this.$axios.get(this.$httpUrl + '/department/list').then(res => res.data).then(res => {
-        console.log(res)
         if (res.code ==200) {
           this.depData = res.data
         } else {
@@ -235,7 +215,6 @@ export default {
     },
     loadStudent(){
       this.$axios.get(this.$httpUrl + '/student/list').then(res => res.data).then(res => {
-        console.log(res)
         if (res.code ==200) {
           this.studentData = res.data
         } else {
@@ -251,12 +230,8 @@ export default {
         param: {
           majorName: this.majorName,
           majorTeacher: this.majorTeacher
-
-
         }
-
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total
@@ -267,13 +242,11 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },
@@ -286,7 +259,6 @@ export default {
       this.majorName = ''
       this.majorTeacher=''
       this.form.majorDepId=''
-
     },
     add() {
       this.centerDialogVisible = true

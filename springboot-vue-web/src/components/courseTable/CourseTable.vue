@@ -168,87 +168,52 @@ export default {
       }).then(res => res.data).then(res => {
 
         if (res.code == 200) {
-          console.log(res.data)
           sessionStorage.setItem('CurClass',JSON.stringify(res.data.class))
           this.total = res.total
         } else {
           alert("获取数据失败")
         }
       })
-
-
       this.$axios.get(this.$httpUrl + '/class/list?classId='+this.classId).then(res => res.data).then(res => {
-        console.log(res.data)
         this.classData=res.data
-
       })
       this.$axios.get(this.$httpUrl + '/class-course/courseTable/'+this.classId).then(res => res.data).then(res => {
-        console.log(res.data)
         this.tableData=res.data
       })
-
-
     },
    async loadClass() {
       this.$axios.get(this.$httpUrl + '/class/list').then(res => res.data
       ).then(res =>  {
-        console.log(res.data)
         this.class1Data=res.data
-
-        // if( this.user.roleId===0) {
-        //
-        //    this.class1Data = res.data.filter(v =>v.type=='是')
-        // }
-        // else {
-        //   this.class1Data=res.data
-        //
-        // }
-
-
       })
-
     },
     loadStudent() {
       this.$axios.get(this.$httpUrl + '/student/list').then(res => res.data).then(res => {
         this.studentData=res.data
-        // this.student.studentClass=res.data.className
-
       })
 
     },
     loadCourse() {
       this.$axios.get(this.$httpUrl + '/course/list').then(res => res.data).then(res => {
         this.CourseData=res.data
-        // this.student.studentClass=res.data.className
-
       })
 
     },
-
     loadTeacher() {
       this.$axios.get(this.$httpUrl + '/teacher/list').then(res => res.data).then(res => {
         this.teacherData=res.data
-
       })
-
     },
-
-
-
   },
   beforeMount() {
     this.loadCourse()
     this.loadTeacher()
     this.loadStudent()
-
     this.loadClass();
   },
   created() {
   }
 }
-// this.student.classId
-
-
 </script>
 
 <style>

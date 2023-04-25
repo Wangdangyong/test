@@ -198,9 +198,6 @@ export default {
         type: '',
         courseNumber: '',
         courseMaxNumber: ''
-
-
-
       },
       form1:{
         classId: '',
@@ -208,42 +205,25 @@ export default {
         weekDay: '',
         section: '',
         studentId:''
-
       }
-
-
-
     }
   },
   methods: {
     formatDep(row){
       let temp=this.depData.find(item=>{
         return item.depId==row.courseDepId
-
       })
       return temp && temp.depName
-
     },
     formatTeacher(row){
       let temp=this.teacherData.find(item=>{
         return item.teacherId==row.courseTeacherId
-
       })
       return temp && temp.teacherName
-
-    },
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/course/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
-
-      })
-
     },
     del(courseId){
       this.$axios.get(this.$httpUrl + '/course/del?courseId='+courseId,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -270,7 +250,6 @@ export default {
 
     },
     mod(row){
-      console.log(row)
       this.form.courseId=row.courseId
       this.form.courseName=row.courseName
       this.form.courseTeacherId=row.courseTeacherId
@@ -283,10 +262,7 @@ export default {
       this.form.type=row.type
       this.form.courseNumber=row.courseNumber
       this.form.courseMaxNumber=row.courseMaxNumber
-
-
       this.centerDialogVisible = true
-
     },
     save() {
       if (this.form.courseId){
@@ -302,14 +278,12 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('修改失败');
-
           }
         })
       }
       else {
         this.$axios.post(this.$httpUrl + '/course/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -320,7 +294,6 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('操作失败');
-
           }
         })
       }
@@ -330,7 +303,6 @@ export default {
     select(scope){
       this.$axios.get(this.$httpUrl + '/class-course/save',
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.$message({
                 message: '选课成功',
@@ -341,14 +313,11 @@ export default {
           this.loadPost()
         } else {
           this.$message.error('操作失败');
-
         }
       })
-
     },
     loadDep(){
       this.$axios.get(this.$httpUrl + '/department/list').then(res => res.data).then(res => {
-        console.log(res)
         if (res.code ==200) {
           this.depData = res.data
         } else {
@@ -359,14 +328,12 @@ export default {
     },
     loadTeacher(){
       this.$axios.get(this.$httpUrl + '/teacher/list').then(res => res.data).then(res => {
-        console.log(res)
         if (res.code ==200) {
           this.teacherData = res.data
         } else {
           // alert("获取数据失败")
         }
       })
-
     },
     loadPost() {
       this.$axios.post(this.$httpUrl + '/course/listPage', {
@@ -374,11 +341,7 @@ export default {
         pageNum: this.pageNum,
         param: {
           courseName: this.courseName
-
-
-
         }
-
       }).then(res => res.data).then(res => {
         console.log(res)
         if (res.code == 200) {

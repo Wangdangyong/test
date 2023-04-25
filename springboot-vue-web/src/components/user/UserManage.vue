@@ -139,19 +139,10 @@ export default {
         roleId: ''
       },
 
-
-
     }
   },
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/user/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
 
-      })
-
-    },
     del(userId){
       this.$axios.get(this.$httpUrl + '/user/del?userId='+userId,
       ).then(res => res.data).then(res => {
@@ -165,11 +156,8 @@ export default {
           this.loadPost()
         } else {
           this.$message.error('操作失败');
-
         }
       })
-
-
     },
     mod(row){
       this.form.userId=row.userId
@@ -182,7 +170,6 @@ export default {
       this.form.userRole=row.userRole
       this.form.roleId=row.roleId
       this.centerDialogVisible = true
-
     },
     save() {
       if (this.form.userId){
@@ -231,7 +218,6 @@ export default {
         }
 
       }).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total
@@ -239,7 +225,6 @@ export default {
           alert("获取数据失败")
         }
       })
-
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);

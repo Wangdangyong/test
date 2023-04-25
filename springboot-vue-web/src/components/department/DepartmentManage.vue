@@ -69,21 +69,6 @@
             <el-input v-model="form.depName"></el-input>
           </el-col>
         </el-form-item>
-
-<!--        <el-form-item label="院系名" >-->
-<!--          <el-col :span="20">-->
-<!--            <el-select v-model="form.depId" placeholder="请选择院系" style="margin-left: 5px">-->
-<!--              <el-option-->
-<!--                  v-for="item in tableData"-->
-<!--                  :key="item.depId"-->
-<!--                  :label="item.depName"-->
-<!--                  :value="item.depId">-->
-<!--              </el-option>-->
-<!--            </el-select>-->
-<!--          </el-col>-->
-<!--        </el-form-item>-->
-
-
         <el-form-item label="专业数量"  label-width="180px">
           <el-col :span="20">
             <el-input v-model="form.depMajorCount"></el-input>
@@ -94,7 +79,6 @@
             <el-input v-model="form.depTeaCount"></el-input>
           </el-col>
         </el-form-item>
-
       </el-form>
       <span slot="footer" class="dialog-footer">
     <el-button @click="centerDialogVisible = false">取 消</el-button>
@@ -123,28 +107,13 @@ export default {
         depName: '',
         depMajorCount: '',
         depTeaCount: ''
-
-
-
       },
-
-
-
     }
   },
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/department/list').then(res => res.data).then(res => {
-        console.log(res)
-        // this.tableData=res
-
-      })
-
-    },
     del(depId){
       this.$axios.get(this.$httpUrl + '/department/del?depId='+depId,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -154,25 +123,16 @@ export default {
           this.loadPost()
         } else {
           this.$message.error('操作失败');
-
         }
       })
-
-
     },
     mod(row){
-      console.log(row)
       this.form.depId=row.depId
       this.form.depNo=row.depNo
-
-
       this.form.depName=row.depName
       this.form.depMajorCount=row.depMajorCount
       this.form.depTeaCount=row.depTeaCount
-
-
       this.centerDialogVisible = true
-
     },
     save() {
       if (this.form.depId){
@@ -195,7 +155,6 @@ export default {
       else {
         this.$axios.post(this.$httpUrl + '/department/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -206,7 +165,6 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('操作失败');
-
           }
         })
       }
@@ -218,10 +176,7 @@ export default {
         pageNum: this.pageNum,
         param: {
           depName: this.depName,
-
-
         }
-
       }).then(res => res.data).then(res => {
         console.log(res)
         if (res.code == 200) {
@@ -234,25 +189,20 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },
     resetForm() {
       this.form.depNo=''
-
-
       this.form.depName=''
       this.form.depMajorCount=''
       this.form.depTeaCount=''
       this.depName = ''
-
     },
     add() {
       this.centerDialogVisible = true
@@ -262,7 +212,6 @@ export default {
     }
   },
   beforeMount() {
-    // this.loadGet();
     this.loadPost();
   }
 }

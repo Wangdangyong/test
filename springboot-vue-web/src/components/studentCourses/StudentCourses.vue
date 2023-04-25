@@ -204,26 +204,15 @@ export default {
         section:'',
         courseNumber:'',
         courseMaxNumber:''
-
-
       },
-
-
-
-
-
     }
   },
   methods: {
     form1(scope){
-
-
     },
-
     del(id){
       this.$axios.get(this.$httpUrl + '/student-courses/del?id='+id,
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code === 200) {
           this.$message({
                 message: '操作成功',
@@ -236,19 +225,14 @@ export default {
 
         }
       })
-
-
     },
     mod(row){
-      console.log(row)
       this.form.id=row.id
       this.form.studentNumber=row.studentNumber
       this.form.courseId=row.courseId
       this.form.classId=row.classId
       this.centerDialogVisible = true
-
     },
-
     async addTable(scope){
       // Promise
       // 同步任务的队列
@@ -265,7 +249,6 @@ export default {
 
           }
       ).then(res => res.data).then(res => {
-        console.log(res)
         if (res.code == 200) {
           this.$message({
                 message: '操作成功',
@@ -295,14 +278,12 @@ export default {
             this.loadPost()
           } else {
             this.$message.error('修改失败');
-
           }
         })
       }
       else {
         this.$axios.post(this.$httpUrl + '/student-courses/save', this.form
         ).then(res => res.data).then(res => {
-          console.log(res)
           if (res.code == 200) {
             this.$message({
                   message: '操作成功',
@@ -326,13 +307,8 @@ export default {
         pageNum: this.pageNum,
         param: {
          studentNumber: this.studentNumber+''
-
-
-
         }
-
       }).then(res => res.data).then(res => {
-
         if (res.code == 200) {
           this.tableData = res.data
           this.total = res.total
@@ -344,19 +320,15 @@ export default {
     },
     loadCourse(){
       this.$axios.get(this.$httpUrl + '/course/list').then(res => res.data).then(res => {
-
         if (res.code ==200) {
           this.courseData = res.data
         } else {
           // alert("获取数据失败")
         }
       })
-
     },
     loadcCourse(){
       this.$axios.get(this.$httpUrl + '/class-course/list').then(res => res.data).then(res => {
-        console.log(res)
-
         if (res.code ==200) {
           this.course1Data = res.data
         } else {
@@ -379,10 +351,8 @@ export default {
     loadStudent(){
       this.$axios.get(this.$httpUrl + '/student/list').then(res => res.data).then(res => {
         this.studentData=res.data
-
         if (res.code ==200) {
           this.studentData=res.data
-
         } else {
           // alert("获取数据失败")
         }
@@ -390,13 +360,11 @@ export default {
 
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageNum = 1
       this.pageSize = val
       this.loadPost()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.pageNum = val
       this.loadPost()
     },
