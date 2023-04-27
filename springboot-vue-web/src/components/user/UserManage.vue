@@ -59,7 +59,7 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form ref="form" :rules="rules":model="form" label-width="80px">
 
         <el-form-item label="姓名"  >
           <el-col :span="20">
@@ -138,6 +138,34 @@ export default {
         userRole:'',
         roleId: ''
       },
+      rules: {
+        userName: [
+          { required: true, message: '请输入姓名', trigger: 'blur' },
+        ],
+        userAccount: [
+          { required: true, message: '请输入账号', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10个字符', trigger: 'blur' }
+        ],
+        userPassword: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ],
+        userRole: [
+          { required: true, message: '请选择角色', trigger: 'blur' }
+        ],
+        roleId: [
+          { required: true, message: '请输入角色id', trigger: 'blur' },
+
+        ],
+        userStuId:[
+          { required: true, message: '请输入学号', trigger: 'blur' },
+
+        ],
+        userTeaId:[
+          { required: true, message: '请输入工号', trigger: 'blur' },
+
+        ],
+
+      }
 
     }
   },
