@@ -2,10 +2,16 @@
   <!-- 表头设置和表的边框-->
   <div>
     <div style="margin-left: 5px;margin-bottom: 20px">
+      <el-button type="primary " @click="add" v-if="user.roleId==0">新增公告</el-button>
 
+      <div class="scroll-container" style="margin-left: 300px;width: 400px">
+        <div class="scroll-content" :style="{ animationDuration: duration }">
+          <div v-model="list" class="scroll-item" style="color: crimson;font-size: large">
+            {{ list }}
+          </div>
+        </div>
+      </div>
 
-
-      <el-button type="primary " @click="add">新增公告</el-button>
     </div>
     <el-table :data="tableData"
               :header-cell-style="{textAlign: 'center',background: '#f2f5fc',color:'#555555'}"
@@ -13,7 +19,7 @@
       <el-table-column prop="notice" label="公告" height="200" width="800" style="color: crimson" >
       </el-table-column>
 
-      <el-table-column prop="operate" label="操作" width="400">
+      <el-table-column prop="operate" label="操作" width="400"  v-if="user.roleId==0" >
         <template slot-scope="scope">
           <el-button type="success" @click="mod(scope.row)" style="margin-right: 20px">修改公告</el-button>
           <el-popconfirm
@@ -97,6 +103,9 @@ export default {
   name: "HPage",
   data() {
     return {
+      notice:'',
+      list: [], // 文字数据
+      duration: "" ,// 动画时间
       registerShow:false,
       user: JSON.parse(sessionStorage.getItem('CurUser')),
       tableData: [],
@@ -114,8 +123,27 @@ export default {
     }
   },
   methods: {
-    loadGet() {
-      this.$axios.get(this.$httpUrl + '/notice/list').then(res => res.data).then(res => {
+    calculateDuration(item) {
+      const length = item.length;
+      const seconds = length/2; // 每秒10个字的速度
+      return `${seconds}s`;
+    },
+    // 更新文字数据
+    updateList() {
+      // 模拟异步获取数据
+      setTimeout(() => {
+          const newData = this.tableData[0].notice;
+          this.list = newData;
+          console.log(this.list)
+          // 根据新数据计算动画时间
+          this.duration = this.calculateDuration(newData);
+          // 递归调用更新文字数据
+          this.updateList();
+      }, 500);
+    },
+
+    async loadGet() {
+      await this.$axios.get(this.$httpUrl + '/notice/list').then(res => res.data).then(res => {
         this.tableData=res.data
       })
     },
@@ -191,15 +219,48 @@ export default {
       })
     }
   },
+  mounted() {
+    this.updateList();
+    this.loadGet();
+  },
   beforeMount() {
     this.loadGet();
+
 
   }
 }
 
 </script>
 
-<style  >
+<style  scoped>
+.scroll-container {
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.scroll-content {
+  display: inline-block;
+  animation-name: scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+}
+
+.scroll-item {
+  display: inline-block;
+  margin-left: 300px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
 
 

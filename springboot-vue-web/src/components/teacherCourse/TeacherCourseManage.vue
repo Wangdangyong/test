@@ -199,6 +199,40 @@
     <el-button type="primary" @click="save">确 定</el-button>
   </span>
     </el-dialog>
+
+    <div style="margin-top: 40px">
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <div>
+            <el-statistic group-separator="," :precision="2" :value="usualScoreNumber1" :title="title" suffix="%"></el-statistic>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div>
+            <el-statistic group-separator="," :precision="2" :value=" finalScoreNumber1" decimal-separator="." :title="title1" suffix="%"></el-statistic>
+            <template slot="prefix">
+              <i class="el-icon-s-flag" style="color: red"></i>
+            </template>
+            <template slot="suffix">
+              <i class="el-icon-s-flag" style="color: blue"></i>
+            </template>
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div>
+            <el-statistic group-separator="," :precision="2" decimal-separator="." :value=" allScoreNumber1" :title="title2">
+              <template slot="prefix">
+                <i class="el-icon-s-flag" style="color: red"></i>
+              </template>
+              <template slot="suffix">
+                <i class="el-icon-s-flag" style="color: blue"></i>
+              </template>
+            </el-statistic>
+
+          </div>
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -208,6 +242,11 @@ export default {
   name: "TeacherCourseManage",
   data() {
     return {
+      like: true,
+      value1: 4154.564,
+      title: '平时成绩及格率',
+      title1:'期末成绩及格率',
+      title2:'成绩及格率',
       user: JSON.parse(sessionStorage.getItem('CurUser')),
       classData: [],
       teaClassData:[],
@@ -238,7 +277,6 @@ export default {
     }
   },
   computed:{
-
     scorePoint(){
 
       if(this.form.allScore>=95){
@@ -267,7 +305,43 @@ export default {
     allScore(){
       this.form.allScore = Math.round(this.form.usualScoreCom*(this.form.usualScore) +  this.form.finalScoreCom*(this.form.finalScore))
       return this.form.allScore
-    }
+    },
+    usualScoreNumber1(){
+      var count=0
+      for(var i=0;i<this.tableData.length;i++){
+        if (this.tableData[i].usualScore>=60){
+          count++
+        }
+        this.usualScoreNumber=count
+
+      }
+      return this.usualScoreNumber / this.tableData.length * 100
+
+    },
+    finalScoreNumber1(){
+      var count=0
+      for(var i=0;i<this.tableData.length;i++){
+        if (this.tableData[i].finalScore>=60){
+          count++
+        }
+        this.finalScoreNumber=count
+
+      }
+      return this.finalScoreNumber / this.tableData.length * 100
+
+    },
+    allScoreNumber1(){
+      var count=0
+      for(var i=0;i<this.tableData.length;i++){
+        if (this.tableData[i].allScore>=60){
+          count++
+        }
+        this.allScoreNumber=count
+
+      }
+      return this.allScoreNumber / this.tableData.length * 100
+
+    },
   },
   methods: {
     loadGet() {

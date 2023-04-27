@@ -33,5 +33,7 @@ public class Review implements Serializable {
 
     private Integer studentId;
 
+    private Integer score;
+
 
 }

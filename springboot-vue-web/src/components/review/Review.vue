@@ -19,17 +19,20 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="teacherId" label="教师" width="180" style="color: crimson" >
+      <el-table-column prop="teacherId" label="教师" width="160" style="color: crimson" >
         <template v-slot="scope">
             <span v-if="scope.row.teacherId">
               {{teacherData.find(v =>v.teacherId==scope.row.teacherId).teacherName}}
             </span>
         </template>
       </el-table-column>
+      <el-table-column prop="score" label="评分" width="160">
+      </el-table-column>
+
       <el-table-column prop="review" label="评价" height="200" width="800" style="color: crimson" >
       </el-table-column>
 
-      <el-table-column prop="operate" label="操作" width="400">
+      <el-table-column prop="operate" label="操作" width="400" v-if="user.roleId!==1">
         <template slot-scope="scope">
           <el-button type="success" @click="mod(scope.row)" v-if="user.roleId==2">修改评价</el-button>
           <el-popconfirm
@@ -85,6 +88,11 @@
             </el-select>
           </el-col>
         </el-form-item>
+        <el-form-item label="评分"  >
+          <el-col :span="20">
+            <el-input v-model="form.score"></el-input>
+          </el-col>
+        </el-form-item>
         <el-form-item label="评价" prop="review">
           <el-input type="textarea" v-model="form.review"></el-input>
         </el-form-item>
@@ -121,7 +129,8 @@ export default {
         id:'',
         review:'',
         teacherId:'',
-        studentId:''
+        studentId:'',
+        score:'',
       },
       rules:{
         review: [
@@ -168,6 +177,7 @@ export default {
       this.form.review=row.review
       this.form.teacherId=row.teacherId
       this.form.studentId=row.studentId
+      this.form.score=row.score
 
       this.centerDialogVisible = true
 
