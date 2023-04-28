@@ -11,7 +11,7 @@
       <el-button type="success " @click="resetForm" v-if="user.roleId===0">重置</el-button>
       <el-button type="primary " @click="add" v-if="user.roleId===0">新增</el-button>
     </div>
-    <el-table :data="tableData.filter(v =>v.studentId===(user.roleId !==2 ? v.studentId : tableData.find(v =>v.studentId===user.userStuId).studentId))"
+    <el-table :data="tableDataFilter"
               :header-cell-style="{background: '#f2f5fc',color:'#555555'}"
     >
       <el-table-column prop="studentId" label="学生" width="160" v-if="user.roleId!==1">
@@ -189,6 +189,16 @@ export default {
         room:'',
         time:'',
       },
+    }
+  },
+  computed: {
+    tableDataFilter() {
+      if (this.user.roleId === 2) {
+        return this.tableData.filter(v => v.studentId === this.tableData.find(v =>v.studentId===this.user.userStuId).studentId)
+      } else if (this.user.roleId === 1) {
+        return this.tableData.filter(v => v.teacherId === this.tableData.find(v =>v.teacherId===this.user.userTeaId).teacherId)
+      }
+      return this.tableData
     }
   },
   methods: {

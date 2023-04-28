@@ -74,14 +74,14 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form" :model="form" label-width="180px">
+      <el-form ref="form" :model="form"  :rules="rules" label-width="180px">
 
-        <el-form-item label="学号"   label-width="180px" >
+        <el-form-item label="学号"   label-width="180px" prop="studentNumber">
           <el-col :span="20">
             <el-input v-model="form.studentNumber"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="学生姓名"  label-width="180px" >
+        <el-form-item label="学生姓名"  label-width="180px" prop="studentName" >
           <el-col :span="20">
             <el-input v-model="form.studentName"></el-input>
           </el-col>
@@ -162,7 +162,15 @@ export default {
         classId: '',
         studentMajorId:'',
         studentGrade:''
-
+      },
+      rules: {
+        studentNumber: [
+          { required: true, message: '请输入学号', trigger: 'blur' },
+          {  message: '数字个数为10个数的学号', trigger: 'blur' }
+        ],
+        studentName: [
+          { required: true, message: '请输入学生名', trigger: 'blur' }
+        ],
 
 
       },

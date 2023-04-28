@@ -60,26 +60,26 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form" :model="form" label-width="180px">
-        <el-form-item label="专业编号"   >
+      <el-form ref="form" :model="form"  :rules="rules" label-width="180px">
+        <el-form-item label="专业编号"  prop="majorNo" >
           <el-col :span="20">
             <el-input v-model="form.majorNo"></el-input>
           </el-col>
         </el-form-item>
 
-        <el-form-item label="专业名"  label-width="180px" >
+        <el-form-item label="专业名"  label-width="180px"  prop="majorName" >
           <el-col :span="20">
             <el-input v-model="form.majorName"></el-input>
           </el-col>
         </el-form-item>
 
 
-        <el-form-item label="专业指导教师"  label-width="180px">
+        <el-form-item label="专业指导教师"  label-width="180px"  prop="majorTeacher" >
           <el-col :span="20">
             <el-input v-model="form.majorTeacher"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="院系" >
+        <el-form-item label="院系"   >
           <el-col :span="20">
             <el-select v-model="form.majorDepId" placeholder="请选择院系" style="margin-left: 5px">
               <el-option
@@ -125,13 +125,22 @@ export default {
         majorName: '',
         majorTeacher: '',
         majorDepId: ''
-
-
+      },
+      rules: {
+        majorNo: [
+          { required: true, message: '请输入专业编号', trigger: 'blur' },
+        ],
+        majorName: [
+          { required: true, message: '请输入专业名', trigger: 'blur' }
+        ],
+        majorTeacher: [
+          { required: true, message: '请输入专业指导教师', trigger: 'blur' }
+        ],
+        majorDepId: [
+          { required: true, message: '', trigger: 'blur' }
+        ],
 
       },
-
-
-
     }
   },
   methods: {

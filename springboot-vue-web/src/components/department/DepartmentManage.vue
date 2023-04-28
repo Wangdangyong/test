@@ -57,24 +57,24 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form" :model="form" label-width="180px">
-        <el-form-item label="院系编号"   >
+      <el-form ref="form" :model="form"  :rules="rules" label-width="180px">
+        <el-form-item label="院系编号"  prop="depNo" >
           <el-col :span="20">
             <el-input v-model="form.depNo"></el-input>
           </el-col>
         </el-form-item>
 
-        <el-form-item label="院系名"  label-width="180px" >
+        <el-form-item label="院系名"  label-width="180px" prop="depName">
           <el-col :span="20">
             <el-input v-model="form.depName"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="专业数量"  label-width="180px">
+        <el-form-item label="专业数量"  label-width="180px" prop="depMajorCount">
           <el-col :span="20">
             <el-input v-model="form.depMajorCount"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="教师数量"  label-width="180px">
+        <el-form-item label="教师数量"  label-width="180px" prop="depTeaCount">
           <el-col :span="20">
             <el-input v-model="form.depTeaCount"></el-input>
           </el-col>
@@ -107,6 +107,21 @@ export default {
         depName: '',
         depMajorCount: '',
         depTeaCount: ''
+      },
+      rules: {
+        depNo: [
+          { required: true, message: '请输入院系编号', trigger: 'blur' },
+        ],
+        depName: [
+          { required: true, message: '请输入院系名', trigger: 'blur' }
+        ],
+        depMajorCount: [
+          { required: true, message: '请输入专业数量', trigger: 'blur' }
+        ],
+        depTeaCount: [
+          { required: true, message: '请输入教师数量', trigger: 'blur' }
+        ],
+
       },
     }
   },

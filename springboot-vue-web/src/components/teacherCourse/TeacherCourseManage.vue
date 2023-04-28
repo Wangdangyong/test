@@ -104,7 +104,7 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form" :model="form" label-width="180px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="180px">
 
 
         <el-form-item label="课程"   label-width="180px"  v-if="user.roleId===0">
@@ -144,22 +144,22 @@
           </el-col>
         </el-form-item>
 
-        <el-form-item label="平时成绩"   label-width="180px"  v-if="user.roleId===1">
+        <el-form-item label="平时成绩"   label-width="180px" prop="usualScore"  v-if="user.roleId===1">
           <el-col :span="20">
             <el-input v-model.number="form.usualScore"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="期末成绩"  label-width="180px"   v-if="user.roleId===1">
+        <el-form-item label="期末成绩"  label-width="180px"  prop="finalScore" v-if="user.roleId===1">
           <el-col :span="20">
             <el-input v-model.number="form.finalScore"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="平时成绩占比"  label-width="180px"   v-if="user.roleId===1">
+        <el-form-item label="平时成绩占比"  label-width="180px" prop="usualScoreCom"  v-if="user.roleId===1">
           <el-col :span="20">
             <el-input v-model.flout="form.usualScoreCom"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="期末成绩占比"  label-width="180px"   v-if="user.roleId===1">
+        <el-form-item label="期末成绩占比"  label-width="180px" prop="finalScoreCom"  v-if="user.roleId===1">
           <el-col :span="20">
             <el-input v-model.flout="form.finalScoreCom"></el-input>
           </el-col>
@@ -274,6 +274,24 @@ export default {
         usualScoreCom:0,
          finalScoreCom:0
       },
+      rules: {
+        usualScore: [
+          { required: true, message: '请输入一个0—100的数', trigger: 'blur' },
+        ],
+        finalScore: [
+          { required: true, message: '请输入一个0到100的数', trigger: 'blur' }
+        ],
+        usualScoreCom: [
+          { required: true, message: '请输入一个0-1的小数', trigger: 'blur' },
+        ],
+        finalScoreCom: [
+          { required: true, message: '请输入一个0-1的小数', trigger: 'blur' }
+        ],
+
+
+
+      },
+
     }
   },
   computed:{

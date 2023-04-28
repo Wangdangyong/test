@@ -152,19 +152,19 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form" :model="form" label-width="180px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="180px">
 
-        <el-form-item label="班级编号"  label-width="180px" >
+        <el-form-item label="班级编号"  label-width="180px"  prop="classNo">
           <el-col :span="20">
             <el-input v-model="form.classNo"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="班级名"  label-width="180px" >
+        <el-form-item label="班级名"  label-width="180px"  prop="className" >
           <el-col :span="20">
             <el-input v-model="form.className"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="班级人数"  label-width="180px" >
+        <el-form-item label="班级人数"  label-width="180px"  prop="classNumber" >
           <el-col :span="20">
             <el-input v-model="form.classNumber"></el-input>
           </el-col>
@@ -210,8 +210,17 @@ export default {
         className: '',
         classNumber: ''
 
-
-
+      },
+      rules: {
+        classNo: [
+          { required: true, message: '请输入班级编号', trigger: 'blur' },
+        ],
+        className: [
+          { required: true, message: '请输入班级', trigger: 'blur' }
+        ],
+        classNumber: [
+          { required: true, message: '请输入班级人数', trigger: 'blur' }
+        ],
 
       },
       form1:{

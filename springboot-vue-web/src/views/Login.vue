@@ -31,7 +31,6 @@ export default {
       loginForm: {
         userAccount: '',
         userPassword: '',
-        // userRole: 'admin',
       },
       rules: {
         userAccount: [
@@ -73,7 +72,6 @@ export default {
           });
         }else {
           this.confirm_disabled=false;
-          console.log("校验失败");
           return false;
 
         }

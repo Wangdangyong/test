@@ -72,9 +72,9 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form" :model="form" label-width="180px">
+      <el-form ref="form" :model="form"  :rules="rules" label-width="180px">
 
-        <el-form-item label="课程名"   label-width="180px" >
+        <el-form-item label="课程名"   label-width="180px"  prop="courseName">
           <el-col :span="20">
             <el-input v-model="form.courseName"></el-input>
           </el-col>
@@ -104,7 +104,7 @@
             </el-select>
           </el-col>
         </el-form-item>
-        <el-form-item label="课程编号"   >
+        <el-form-item label="课程编号"   prop="courseNo" >
           <el-col :span="20">
             <el-input v-model="form.courseNo"></el-input>
           </el-col>
@@ -122,12 +122,12 @@
             </el-select>
           </el-col>
         </el-form-item>
-        <el-form-item label="教室"   >
+        <el-form-item label="教室"   prop="room">
           <el-col :span="20">
             <el-input v-model="form.room"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="学分"   label-width="180px" >
+        <el-form-item label="学分"   label-width="180px" prop="courseCredit" >
           <el-col :span="20">
             <el-input v-model="form.courseCredit"></el-input>
           </el-col>
@@ -221,8 +221,20 @@ export default {
         type: '',
         courseNumber: '',
         courseMaxNumber: ''
-
-
+      },
+      rules: {
+        courseName: [
+          { required: true, message: '请输入课程名', trigger: 'blur' },
+        ],
+        courseNo: [
+          { required: true, message: '请输入课程编号', trigger: 'blur' }
+        ],
+        room: [
+          { required: true, message: '教室不能为空', trigger: 'blur' }
+        ],
+        courseCredit: [
+          { required: true, message: '学分不能超过6', trigger: 'blur' }
+        ],
 
       },
 

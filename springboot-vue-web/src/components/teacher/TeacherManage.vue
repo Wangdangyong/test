@@ -63,14 +63,14 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form" :model="form" label-width="180px">
+      <el-form ref="form" :model="form"  :rules="rules1" label-width="180px">
 
-        <el-form-item label="教职工号"   label-width="180px" >
+        <el-form-item label="教职工号"   label-width="180px"  prop="teacherNumber">
           <el-col :span="20">
             <el-input v-model="form.teacherNumber"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="教师姓名"  label-width="180px" >
+        <el-form-item label="教师姓名"  label-width="180px"  prop="teacherName">
           <el-col :span="20">
             <el-input v-model="form.teacherName"></el-input>
           </el-col>
@@ -121,6 +121,16 @@ export default {
         teacherName: '',
         teacherDepId: ''
       },
+      rules1: {
+        teacherNumber: [
+          { required: true, message: '请输入教职工号', trigger: 'blur' },
+        ],
+        teacherName: [
+          { required: true, message: '请输入教师姓名', trigger: 'blur' }
+        ],
+
+      }
+
     }
   },
   methods: {
