@@ -12,13 +12,6 @@
             <el-input style="width: 200px" type="password" v-model="loginForm.userPassword"
                       show-password autocomplete="off" size="small"  @keyup.enter.native></el-input>
           </el-form-item>
-          <el-form-item label="角色" prop="userRole">
-            <el-select v-model="loginForm.userRole">
-              <el-option label="管理员" value="admin"></el-option>
-              <el-option label="教师" value="teacher"></el-option>
-              <el-option label="学生" value="student"></el-option>
-            </el-select>
-          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="confirm" :disabled="confirm_disabled" >登录</el-button>
           </el-form-item>
@@ -38,7 +31,7 @@ export default {
       loginForm: {
         userAccount: '',
         userPassword: '',
-        userRole: 'admin',
+        // userRole: 'admin',
       },
       rules: {
         userAccount: [
@@ -48,9 +41,7 @@ export default {
         userPassword: [
           { required: true, message: '请输入密码', trigger: 'blur' }
         ],
-        userRole: [
-          { required: true, message: '请选择角色', trigger: 'blur' }
-        ],
+
       }
     };
   },
@@ -72,9 +63,10 @@ export default {
               this.$store.commit("setMenu",res.data.menu)
               this.$router.replace('/index')
 
-            } else {
+            }
+            else {
               this.confirm_disabled=false
-              alert("校验失败，请重新匹配")
+              alert("用户名或密码错误，请重新输入")
               return false
 
             }
@@ -107,7 +99,7 @@ export default {
   margin-top: -250px;
   margin-left: -250px;
   width: 500px;
-  height: 350px;
+  height: 300px;
   background: #fff;
   border-radius: 5%;
 }

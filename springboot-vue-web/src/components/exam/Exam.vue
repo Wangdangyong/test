@@ -17,14 +17,14 @@
       <el-table-column prop="studentId" label="学生" width="160" v-if="user.roleId!==1">
         <template v-slot="scope">
             <span v-if="scope.row.studentId">
-              {{scoreData.find(v =>v.studentId===scope.row.studentId).studentId}}
+              {{studentData.find(v =>v.studentNumber===scope.row.studentId).studentName}}
             </span>
         </template>
       </el-table-column>
-      <el-table-column prop="courseId" label="课程id" width="200">
+      <el-table-column prop="courseId" label="课程" width="200">
         <template v-slot="scope">
             <span v-if="scope.row.courseId">
-              {{scoreData.find(v =>v.courseId===scope.row.courseId).courseId}}
+              {{courseData.find(v =>v.courseId===scope.row.courseId).courseName}}
             </span>
         </template>
       </el-table-column>
@@ -77,7 +77,7 @@
               <el-option
                   v-for="item in scoreData"
                   :key="item.studentId"
-                  :label="item.studentId"
+                  :label="studentData.find(v=>v.studentNumber==item.studentId).studentName"
                   :value="item.studentId">
               </el-option>
             </el-select>
@@ -89,7 +89,7 @@
               <el-option
                   v-for="item in scoreData"  v-show="item.studentId === form.studentId"
                   :key="item.courseId"
-                  :label="item.courseId"
+                  :label="courseData.find(v=>v.courseId==item.courseId).courseName"
                   :value="item.courseId">
               </el-option>
             </el-select>
@@ -193,7 +193,7 @@ export default {
   },
   methods: {
     del(id){
-      this.$axios.get(this.$httpUrl + '/examination/del?id='+id,
+      this.$axios.get(this.$httpUrl + '/exam/del?id='+id,
       ).then(res => res.data).then(res => {
         if (res.code === 200) {
           this.$message({
@@ -220,7 +220,7 @@ export default {
     },
     save() {
       if (this.form.id){
-        this.$axios.post(this.$httpUrl + '/examination/update', this.form
+        this.$axios.post(this.$httpUrl + '/exam/update', this.form
         ).then(res => res.data).then(res => {
           if (this.form.id) {
             this.$message({
@@ -236,7 +236,7 @@ export default {
         })
       }
       else {
-        this.$axios.post(this.$httpUrl + '/examination/save', this.form
+        this.$axios.post(this.$httpUrl + '/exam/save', this.form
         ).then(res => res.data).then(res => {
           if (res.code == 200) {
             this.$message({
@@ -304,7 +304,7 @@ export default {
 
     },
     loadPost() {
-      this.$axios.post(this.$httpUrl + '/examination/listPage', {
+      this.$axios.post(this.$httpUrl + '/exam/listPage', {
         pageSize: this.pageSize,
         pageNum: this.pageNum,
         param: {

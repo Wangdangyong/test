@@ -104,8 +104,7 @@ public class UserController {
     public Result login(@RequestBody User user) {
         List<User> list = userService.lambdaQuery()
                 .eq(User::getUserAccount, user.getUserAccount())
-                .eq(User::getUserPassword, user.getUserPassword())
-                .eq(User::getUserRole, user.getUserRole()).list();
+                .eq(User::getUserPassword, user.getUserPassword()).list();
         if (list.size() > 0) {
             User user1 = (User) list.get(0);
             List<Menu> menuList = menuService.lambdaQuery().like(Menu::getMenuRight, user1.getRoleId()).list();
