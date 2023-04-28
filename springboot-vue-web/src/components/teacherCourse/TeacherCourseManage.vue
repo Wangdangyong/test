@@ -200,7 +200,7 @@
   </span>
     </el-dialog>
 
-    <div style="margin-top: 40px">
+    <div style="margin-top: 40px" v-if="user.roleId===1">
       <el-row :gutter="20">
         <el-col :span="6">
           <div>

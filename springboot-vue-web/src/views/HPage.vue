@@ -6,7 +6,7 @@
 
       <div class="scroll-container" style="margin-left: 300px;width: 400px">
         <div class="scroll-content" :style="{ animationDuration: duration }">
-          <div v-model="list" class="scroll-item" style="color: crimson;font-size: large">
+          <div v-model="list" class="scroll-item" style="color: crimson;font-size: large" >
             {{ list }}
           </div>
         </div>
